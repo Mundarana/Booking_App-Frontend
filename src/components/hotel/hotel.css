@@ -1,0 +1,41 @@
+.oHotel {
+  width: 100%;
+  max-width: 1124px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.oHotelItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.oHotelImg{
+  width: 100%;
+}
+
+.oHotelName {
+  font-size: medium;
+  font-weight: 900;
+  padding-top: 6px;
+}
+
+.oHotelCity {
+  font-weight: 300;
+}
+
+.oHotelPrice {
+  font-weight: 600;
+}
+
+.oHotelRating button {
+  background-color: aquamarine;
+  color: blue;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 10px;
+  font-weight: bold;
+}

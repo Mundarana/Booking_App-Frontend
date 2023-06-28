@@ -1,0 +1,53 @@
+.contact {
+  background-color: aquamarine;
+  color: #0071c0;
+  margin-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.contactContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.contactFrom {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contactClintInfo {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.contactMsg{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contactMsgText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.conatctButton {
+  border: none;
+  border-radius: .13rem;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: white;
+  background-color: #0071c0;
+}
+

@@ -1,0 +1,41 @@
+/* hotel-adding-page.css */
+
+.hotel-adding-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hotel-adding-page h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.hotel-adding-page form {
+  display: grid;
+  gap: 10px;
+}
+
+.hotel-adding-page label {
+  font-weight: bold;
+}
+
+.hotel-adding-page input,
+.hotel-adding-page textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.hotel-adding-page button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.hotel-adding-page button[type="submit"]:hover {
+  background-color: #0056b3;
+}

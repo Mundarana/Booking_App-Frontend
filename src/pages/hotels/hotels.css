@@ -1,0 +1,106 @@
+.hContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.hoWrap{
+  width: 100%;
+  max-width: 1124px;
+} 
+
+.hWrapper {
+  width: 100%;
+  margin-top: 20px;
+  max-width: 1124px;
+  display: flex;
+  gap: 20px;
+}
+
+.hotelsSearch {
+  flex: 1;
+  background-color: aquamarine;
+  padding: 10px;
+  border-radius: 10px;
+  position: sticky;
+  top: 10px;
+  height: max-content;
+}
+
+.hsTitle {
+  font-size: 20px;
+  color: blue;
+  margin-bottom: 10px;
+}
+
+.hsItem{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.hsItem label {
+  font-size: 14px;
+}
+
+.hsItem input {
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.hsItem span {
+  height: 30px;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dateSpan{
+  background-color: white;
+}
+
+.info {
+  color: blue;
+  font-size: larger;
+  font-weight: 800;
+}
+
+.hsInfo {
+  padding: 10px;
+}
+
+.hsInfoItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 12px;
+}
+
+.hsInfoText small {
+  font-size: 9px;
+  margin-left: 10px;
+}
+
+.hsInfoInput{
+  width: 50px;
+}
+
+.hotelsSearch button {
+  padding: 10px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: 700;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hotelsResult {
+  flex: 3;
+}

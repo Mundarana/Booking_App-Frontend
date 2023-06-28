@@ -1,0 +1,33 @@
+.hList{
+  width: 100%;
+  max-width: 1124px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.hListItem{
+  flex:1;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.hListImg{
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.hListTitles>h1{
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 0;
+  color: #444;
+}
+
+.hListTitles>h2{
+  font-size: 14px;
+  font-weight: 300;
+  margin-top: 2px;
+}

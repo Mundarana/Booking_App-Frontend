@@ -1,0 +1,38 @@
+.city {
+  width: 100%;
+  max-width: 1124px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 1;
+}
+
+.citiesItem {
+  position: relative;
+  color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 250px;
+}
+
+.citiesImg {
+  width: 100%;
+  object-fit: cover;
+}
+
+.citiesTitles {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+
+}
+
+.citiesTitles h1 {
+  margin-top: 0;
+  margin-bottom: 2px;
+}
+
+.citiesTitles h2 {
+  margin-top: 0;
+  margin-bottom: 2px;
+}
