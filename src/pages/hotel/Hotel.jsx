@@ -1,13 +1,17 @@
 import './hotel.css';
 import { useState } from 'react';
-import Navbar from '../../components/navbar/Navbar';
+import Navbar from '../../components/LOGIN_SIGNUP/navbar/NavbarLS';
 import Header from '../../components/header/Header';
 import Contact from '../../components/contact/Conatct';
 import {ImLocation2} from 'react-icons/im';
 import {AiOutlineLeft, AiOutlineRight} from 'react-icons/ai';
 import {RxExit} from 'react-icons/rx';
+import { useRef } from 'react';
+import LoadingOverlay from "react-loading-overlay";
 
 export default function Hotel () {
+
+  const resultRef = useRef(null)
 
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
@@ -37,33 +41,27 @@ export default function Hotel () {
   return (
     <div>
       <Navbar />
-      <Header type='hotel'/>
+      <Header type='hotel' resultRef={resultRef}/>
      
       <div className="hotelContainer">
 
-        {
-          open &&
-          <div className="slider">
-            
-          </div>
-        }
 
         <div className="hotelWrapper">
 
-          <button className="bookNow">Book Now</button>
+          {/* <button className="bookNow">Book Now</button> */}
           <h1 className="hotelTitle">Hotel Post</h1>
           <div className="hotelAddress">
             <ImLocation2 />
             <span className="">Eliesen Str 2 63743, Aschaffenburg</span>
           </div>
           <span className='hotelDistance'>Excellent location - 1km from City-Center </span>
-          <div className="hotelImages">
+          {/* <div className="hotelImages">
             {photos.map((photo, i) => (
               <div className="hotelImgWrapper">
                 <img onClick={() =>handleOpen(i)} src={photo.src} alt="" className="hotelImg" />
               </div>
             ))}
-          </div>
+          </div> */}
           <div className="hotelDetails">
             <div className="hotelDetailsText">
               <h1 className="hotelTitle">BestHotel in the City</h1>
@@ -82,9 +80,16 @@ export default function Hotel () {
               <button>Book Know</button>
             </div>
           </div>
+          <div className="hotelImages">
+            {photos.map((photo, i) => (
+              <div className="hotelImgWrapper">
+                <img onClick={() =>handleOpen(i)} src={photo.src} alt="" className="hotelImg" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <Contact />
+      <Contact ref={resultRef} />
     </div>
   );
 };

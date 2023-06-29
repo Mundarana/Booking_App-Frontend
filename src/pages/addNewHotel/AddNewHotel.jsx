@@ -1,10 +1,16 @@
 import './addNewHotel.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Contact from '../../components/contact/Conatct';
-import Header from '../../components/LOGIN_SIGNUP/header/LS-Header';
+import NavbarLS from '../../components/LOGIN_SIGNUP/navbar/NavbarLS';
+import Header from '../../components/header/Header';
+import { useRef } from 'react';
+import LoadingOverlay from "react-loading-overlay";
 
-export default function HotelAddingPage(){
-  const [img, setImg] = useState('');
+export default function HotelAddingPage() {
+
+  const resultRef = useRef(null)
+
+  const [img, setImg] = useState([]);
   const [hotelName, setHotelName] = useState('');
   const [typeOfHotel, setTypeOfHotel] = useState('');
   const [description, setDescription] = useState('');
@@ -13,6 +19,7 @@ export default function HotelAddingPage(){
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [distance, setDistance] = useState('');
+  const [telephone, setTelephone] = useState('');
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -27,13 +34,47 @@ export default function HotelAddingPage(){
       price,
       address,
       city,
-      distance
+      distance,
+      telephone,
     });
+
+    // Send the form data to the backend server
+    fetch('http://localhost:8600/hotels', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${'token'}`,
+      },
+      body: JSON.stringify({
+        img,
+        hotelName,
+        typeOfHotel,
+        description,
+        hotelRating,
+        price,
+        address,
+        city,
+        distance,
+        telephone,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response from the backend if needed
+        console.log('Response from backend:', data);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error('Error:', error);
+      });
+
+
   };
 
   return (
+    
     <div className="newContainer">
-      <Header />
+      <NavbarLS />
+      <Header type="hotel" resultRef={resultRef}/>
       <div className="hotel-adding-page">
         <h2>Add a New Hotel</h2>
         <form onSubmit={handleFormSubmit}>
@@ -46,6 +87,7 @@ export default function HotelAddingPage(){
               value={img}
               onChange={(e) => setImg(e.target.value)}
             />
+            <button className="anhImgUploadBtn">Upload</button>
           </div>
           <div className="hotelName-input">
             <label htmlFor="hotelName">Hotel Name:</label>
@@ -100,6 +142,15 @@ export default function HotelAddingPage(){
               onChange={(e) => setAddress(e.target.value)}
             />
           </div>
+          <div className="telephone-input">
+            <label htmlFor="telephone">Tel:</label>
+            <input
+              type="number"
+              id="telephone"
+              value={telephone}
+              onChange={(e) => setTelephone(e.target.value)}
+            />
+          </div>
           <div className="city-input">
             <label htmlFor="city">City:</label>
             <input
@@ -121,8 +172,7 @@ export default function HotelAddingPage(){
           <button type="submit">Add Hotel</button>
         </form>
       </div>
-      <Contact />
+      <Contact ref={resultRef} />
     </div>
   );
-};
-
+}

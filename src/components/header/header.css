@@ -46,6 +46,11 @@
   padding: 10px;
   cursor: pointer;
   border: none;
+  transition: 1s ease;
+}
+
+.headerBtn:hover {
+  background-color: blue;
 }
 
 .headerSearch{
