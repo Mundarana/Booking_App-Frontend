@@ -1,5 +1,5 @@
 import './hotels.css';
-import Navbar from '../../components/navbar/Navbar';
+import Navbar from '../../components/LOGIN_SIGNUP/navbar/NavbarLS';
 import Header from "../../components/header/Header";
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
@@ -9,8 +9,12 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import SearchItem from '../../components/searchItem/SearchItem';
 import Contact from '../../components/contact/Conatct';
+import { useRef } from 'react';
+import LoadingOverlay from "react-loading-overlay";
 
 export default function Hotels() {
+
+  const resultRef = useRef(null)
 
   const location = useLocation();
   
@@ -22,7 +26,7 @@ export default function Hotels() {
   return (
     <div>
       <Navbar />
-      <Header type='hotel'/>
+      <Header type='hotel' resultRef={resultRef}/>
       
       <div className="hContainer">
         <div className='hoWrap'>
@@ -44,6 +48,7 @@ export default function Hotels() {
               </span>
               {openDate && (
                 <DateRange
+                  classNames='hsDateRange'
                   onChange={(item) => setDate([item.selection])}
                   minDate={new Date()}
                   ranges={date}
@@ -103,7 +108,7 @@ export default function Hotels() {
 
             </div>
 
-              <button>Search</button>
+              <button className='hsBtn'>Search</button>
               
           </div>
 
@@ -119,7 +124,7 @@ export default function Hotels() {
        </div>
 
       </div>
-          <Contact />
+      <Contact ref={resultRef} />
     </div>
   )
 }

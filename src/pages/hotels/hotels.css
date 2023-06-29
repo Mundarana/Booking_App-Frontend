@@ -86,11 +86,12 @@
   margin-left: 10px;
 }
 
+
 .hsInfoInput{
   width: 50px;
 }
 
-.hotelsSearch button {
+.hsBtn {
   padding: 10px;
   background-color: #0071c2;
   color: white;
@@ -99,6 +100,11 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: 1s ease;
+}
+
+.hsBtn:hover {
+  background-color: blue;
 }
 
 .hotelsResult {

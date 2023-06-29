@@ -9,7 +9,7 @@ export default function Hotel() {
           alt="" className="oHotelImg" />
         <span className="oHotelName">HotelPost</span>
         <span className="oHotelCity">Aschaffenburg</span>
-        <span className="oHotelPrice">Strating from 8€</span>
+        <span className="oHotelPrice">Strating from 80€</span>
         <div className="oHotelRating">
           <button>3.9</button>
           <span>Good</span>
@@ -20,7 +20,7 @@ export default function Hotel() {
           alt="" className="oHotelImg" />
         <span className="oHotelName">HotelPost</span>
         <span className="oHotelCity">Aschaffenburg</span>
-        <span className="oHotelPrice">Strating from 8€</span>
+        <span className="oHotelPrice">Strating from 80€</span>
         <div className="oHotelRating">
           <button>3.9</button>
           <span>Good</span>
@@ -31,7 +31,7 @@ export default function Hotel() {
           alt="" className="oHotelImg" />
         <span className="oHotelName">HotelPost</span>
         <span className="oHotelCity">Aschaffenburg</span>
-        <span className="oHotelPrice">Strating from 8€</span>
+        <span className="oHotelPrice">Strating from 80€</span>
         <div className="oHotelRating">
           <button>3.9</button>
           <span>Good</span>
@@ -42,7 +42,7 @@ export default function Hotel() {
           alt="" className="oHotelImg" />
         <span className="oHotelName">HotelPost</span>
         <span className="oHotelCity">Aschaffenburg</span>
-        <span className="oHotelPrice">Strating from 8€</span>
+        <span className="oHotelPrice">Strating from 80€</span>
         <div className="oHotelRating">
           <button>3.9</button>
           <span>Good</span>

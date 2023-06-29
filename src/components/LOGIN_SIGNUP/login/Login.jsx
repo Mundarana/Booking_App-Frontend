@@ -1,38 +1,45 @@
-import { useContext, useState } from 'react';
-import { AuthContext } from '../../../context/authContext';
-import './login.css';
-//we need to haver two variables, one for fetching from the frontend and one for the backend, like so:
+import { useState, useContext } from "react";
+import { AuthContext } from "../../../context/authContext";
+import Contact from '../../contact/Conatct';
+import Navbar from '../../LOGIN_SIGNUP/navbar/NavbarLS';
+import Header from '../../header/Header'
+import './login.css'
+import LoadingOverlay from "react-loading-overlay";
 
- const localUrl = "http://localhost:8600";
- const deployedUrl = "https://booking-app-eqel.onrender.com/"
+
+//we need to haver two variables, one for fetching from the frontend and one for the backend, like so:
+const localUrl = "http://localhost:8600/user/login";
+const deployedUrl = "https://booking-app-eqel.onrender.com/user/login"
 
 export default function Login() {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { login } = useContext(AuthContext)
+  const { login } = useContext(AuthContext);
 
-  const submitForm = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(localUrl, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${'token'}`
-      },
-      body: JSON.stringify({email, password})
+    const response = await fetch(deployedUrl, {
+      method: "POST",
+
+      headers: { "Content-Type": "application/json",
+
+    },
+      body: JSON.stringify({ email, password }),
     });
 
     const data = await response.json();
+    console.log('response:', data)
 
     if (!response.ok) {
       setIsLoading(false);
-      setError(data.error)
+      setError(data.error);
     }
 
     if (response.ok) {
@@ -42,32 +49,34 @@ export default function Login() {
         login(data.token);
       }, 5000);
     }
+  };
 
-  } 
-  
   return (
-    <div className='login'>
-      <div className="loginContainer">
-      <form className='login' onSubmit={submitForm}>
+    <LoadingOverlay active={isLoading} spinner text="Logging in...">
+    <div className="loginContainer">
+      <Navbar />
+      <Header type='hotel' />
+      <form className="login" onSubmit={handleSubmit}>
         <h3>Log in</h3>
-        <label >Email</label>
+        <label>email: </label>
         <input
           type="email"
-          value={email}
           onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
 
-        <label >Pasword</label>
+        <label>password: </label>
         <input
           type="password"
-          value={password}
           onChange={(e) => setPassword(e.target.value)}
+          value={password}
         />
 
-        <button className="loginBtn">Log in</button>
-        {error && <div className='error'>{error}</div>}
+        <button>Log in</button>
+        {error && <div className="error">{error}</div>}
       </form>
+      <Contact />
       </div>
-    </div>
-  )
+    </LoadingOverlay>
+  );
 }

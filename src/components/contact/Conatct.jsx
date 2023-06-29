@@ -1,12 +1,13 @@
 import './contact.css';
 import Footer from '../footer/Fotter';
+import { forwardRef } from 'react';
 
-export default function Contact() {
+const Contact = forwardRef((props, ref) => {
   return (
-    <div className='contact' id='contact'>
+    <div className='contact' id='contact' ref={ref} >
       <div className="contactContainer">
         <div className="contactText">
-          <h1>Cotact Us</h1>
+          <h1>Contact Us</h1>
         </div>
         <div className="conatactForm">
           <form action="">
@@ -19,7 +20,7 @@ export default function Contact() {
             <div className='contactMsg'>
               <div className='contactMsgText'>
                 <label>Message</label>
-                <textarea name="message" />
+                <textarea className='classMsgTextArea' name="message" />
               </div>
               <button className='conatctButton'>Submit</button>
             </div>
@@ -32,4 +33,6 @@ export default function Contact() {
 
     </div>
   )
-}
+})
+
+export default Contact

@@ -1,19 +1,27 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route,  Navigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from './context/authContext';
 import Home from './pages/home/Home';
 import Hotels from './pages/hotels/Hotels';
 import Hotel from './pages/hotel/Hotel';
-import LoginSignup from './pages/LOGIN_SIGNUP/LoginSignup';
+import Login from './components/LOGIN_SIGNUP/login/Login';
+import Signup from './components/LOGIN_SIGNUP/signup/Signup';
 import AddNewHotel from './pages/addNewHotel/AddNewHotel';
 
 function App() {
+  const { token } = useContext(AuthContext);
+  
   return (
+
     <div className="App">
+
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/hotels' element={<Hotels />} />
         <Route path='/hotels/:id' element={<Hotel />} />
-        <Route path='/login&signup' element={<LoginSignup />} />
+        <Route path='/login' element={!token ? <Login /> : <Navigate to="/" />} />
+        <Route path='/signup' element={!token ? <Signup /> : <Navigate to="/" />} />
         <Route path='/hotels/add' element={<AddNewHotel />} />
       </Routes>
     </div>

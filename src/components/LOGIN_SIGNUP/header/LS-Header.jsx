@@ -3,12 +3,13 @@ import {AiFillHome, AiOutlineAppstoreAdd} from 'react-icons/ai';
 import {RiCustomerService2Fill} from 'react-icons/ri';
 import {FaHotel} from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
+import NavbarLS from '../navbar/NavbarLS';
 
 export default function LSHeader() {
   return (
     <div className='header'>
       <div className="lshLogo">
-        <span className="logoName logo ">Smile<span className="logoType logo ">Booking</span></span>
+        <NavbarLS />
       </div>
       <div className="headerContainer">
         <div className="headerList">

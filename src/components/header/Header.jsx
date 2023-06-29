@@ -1,4 +1,5 @@
 import './header.css'
+import { useRef } from 'react';
 import {FaHotel} from 'react-icons/fa';
 import {BiSolidHotel} from 'react-icons/bi'
 import { AiOutlineSearch, AiFillHome, AiOutlineAppstoreAdd} from 'react-icons/ai';
@@ -13,7 +14,8 @@ import { useNavigate,NavLink } from 'react-router-dom';
 
 
 
-export default function Header({type}) {
+export default function Header({type, resultRef}) {
+
 
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
@@ -42,6 +44,8 @@ export default function Header({type}) {
     });
   };
 
+
+
   const handleSearch = () => {
     navigate("/hotels", { state: { destination, date, options } });
   };
@@ -66,7 +70,8 @@ export default function Header({type}) {
     
           <div className="headerListItem">
             <RiCustomerService2Fill  />
-            <NavLink to='#cotact' exact activeClassName='current' >Contact</NavLink>
+            <NavLink onClick={() => (resultRef.current.scrollIntoView({behavior: "smooth"}))}  exact activeClassName='current' >Contact</NavLink>
+            
           </div>
 
         </div>
@@ -78,7 +83,7 @@ export default function Header({type}) {
           <p className="headerDesc">
             Get rewarded for your bookings - unlock intant savings 10% or more with a free SmileBooking account
           </p>
-          <button className="headerBtn">Signup / Login</button>
+          
 
           <div className="headerSearch">
             <div className="headerSearchItem">
@@ -168,4 +173,3 @@ export default function Header({type}) {
     </div>
   )
 }
-
