@@ -6,11 +6,12 @@ import { AiOutlineSearch, AiFillHome, AiOutlineAppstoreAdd} from 'react-icons/ai
 import { BsCalendar3 , BsFillPersonFill} from 'react-icons/bs';
 import {RiCustomerService2Fill} from 'react-icons/ri';
 import { DateRange } from 'react-date-range';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from 'date-fns';
 import { useNavigate,NavLink } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
 
 
 
@@ -45,6 +46,15 @@ export default function Header({type, resultRef}) {
   };
 
 
+  const { logout, token } = useContext(AuthContext);
+
+  const handleClick = () => {
+    localStorage.removeItem("token");
+    logout();
+  };
+
+
+
 
   const handleSearch = () => {
     navigate("/hotels", { state: { destination, date, options } });
@@ -65,7 +75,12 @@ export default function Header({type, resultRef}) {
 
           <div className="headerListItem">
             <AiOutlineAppstoreAdd  />
+            {token === null && (
+          <div>
             <NavLink to='/hotels/add' exact activeClassName='current' >Add New</NavLink>
+          </div>
+        )}
+            {/* <NavLink to='/hotels/add' exact activeClassName='current' >Add New</NavLink> */}
           </div>
     
           <div className="headerListItem">

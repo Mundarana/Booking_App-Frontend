@@ -17,7 +17,8 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { login } = useContext(AuthContext);
+  const { login,token } = useContext(AuthContext);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,8 +29,9 @@ export default function Login() {
     const response = await fetch(deployedUrl, {
       method: "POST",
 
-      headers: { "Content-Type": "application/json",
-
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
     },
       body: JSON.stringify({ email, password }),
     });

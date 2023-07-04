@@ -1,4 +1,9 @@
-import './hotel.css'
+import './hotel.css';
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../context/authContext";
+
+const localUrl = "http://localhost:8600/hotels";
+const deployedUrl = "https://booking-app-eqel.onrender.com/hotels";
 
 export default function Hotel() {
   return (

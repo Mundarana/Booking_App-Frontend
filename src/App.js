@@ -16,13 +16,32 @@ function App() {
 
     <div className="App">
 
+      {/* {token ? (
+              <div>
+                <Routes>
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
+                <Route path='/hotels/add' element={<AddNewHotel />} />
+                </Routes>
+              </div>
+            ) : (
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/hotels' element={<Hotels />} />
+                <Route path='/hotels/:id' element={<Hotel />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
+              </Routes>
+            )} */}
+
+
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/hotels' element={<Hotels />} />
         <Route path='/hotels/:id' element={<Hotel />} />
         <Route path='/login' element={!token ? <Login /> : <Navigate to="/" />} />
         <Route path='/signup' element={!token ? <Signup /> : <Navigate to="/" />} />
-        <Route path='/hotels/add' element={<AddNewHotel />} />
+        <Route path='/hotels/add' element={!token ? <AddNewHotel /> : <Navigate to="/" />} />
       </Routes>
     </div>
   );

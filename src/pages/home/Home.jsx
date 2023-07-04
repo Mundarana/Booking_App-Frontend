@@ -14,6 +14,7 @@ export default function Home() {
   
   return (
     <div>
+      <LoadingOverlay>
       <Navbar />
       <Header resultRef={resultRef}/>
       <div className="homeContainer">
@@ -25,7 +26,7 @@ export default function Home() {
           <Hotel />
       </div>
       <Contact ref={resultRef} />
-      
+      </LoadingOverlay>
     </div>
   )
 }

@@ -33,7 +33,7 @@
   font-size: small;
 }
 
-.siDistanc {
+.siDistance {
   font-size: 15px;
   background-color: aqua;
   width: max-content;
@@ -96,6 +96,7 @@
   background-color: #0071c0;
   color: white;
   font-weight: bold;
+  align-items: center;
   padding: 10px;
   border: none;
   border-radius: 5px;

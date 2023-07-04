@@ -1,178 +1,383 @@
 import './addNewHotel.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Contact from '../../components/contact/Conatct';
 import NavbarLS from '../../components/LOGIN_SIGNUP/navbar/NavbarLS';
 import Header from '../../components/header/Header';
+import UploadPhoto from '../../components/uploadPhotos/UploadPhoto';
 import { useRef } from 'react';
 import LoadingOverlay from "react-loading-overlay";
+import AuthContext from '../../context/authContext';
+import axios from 'axios';
 
-export default function HotelAddingPage() {
+
+const localUrl = "http://localhost:8600/hotels";
+const deployedUrl = "https://booking-app-eqel.onrender.com/hotels";
+
+const HotelAddingPage = () => {
+
+  
+
+  const [formData, setFormData] = useState({
+    name: '',
+    typeOfProperty: '',
+    city: '',
+    address: '',
+    telephone: '',
+    distanceFromCityCenter: '',
+    photos: [],
+    title: '',
+    desc: '',
+    rating: 0,
+    rooms: [],
+    cheapestPrice: 0,
+  });
+
+  const [isLoading, setIsLoading] = useState(false)
+
+
+  const [selectedHotel, setSelectedHotel] = useState(null);
+
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleRoomInputChange = (index, event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => {
+      const updatedRooms = [...prevData.rooms];
+      updatedRooms[index][name] = value;
+      return {
+        ...prevData,
+        rooms: updatedRooms,
+      };
+    });
+  };
+
+  const handleAddRoom = () => {
+    setFormData((prevData) => {
+      return {
+        ...prevData,
+        rooms: [
+          ...prevData.rooms,
+          {
+            roomTitle: '',
+            price: '',
+            maxPeople: '',
+            roomDesc: ''
+          }
+        ]
+      };
+    });
+  };
+
+  const handleRemoveRoom = (index) => {
+    setFormData((prevData) => {
+      const updatedRooms = [...prevData.rooms];
+      updatedRooms.splice(index, 1);
+      return {
+        ...prevData,
+        rooms: updatedRooms,
+      };
+    });
+  };
+
+
+  // PICTURES HAVE TO BE ADDED FROM THIS FUNCTION RATHER THAN THEIR OWN COMPONENT
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsLoading(true)
+    console.log("FORM DATA RIGHT BEFORE SUBMISSION",formData)
+    try {
+      const response = await fetch(deployedUrl, {
+        method: "POST", // Adjust the method as per your backend API
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+      const data = await response.json();
+
+      console.log("DATA", data)
+      
+      if (response.ok) {
+        // If the response is successful, display a success message or handle the success scenario.
+        console.log("Hotel data submitted successfully!");
+        // Reset form data
+        setFormData({
+          name: '',
+          typeOfProperty: '',
+          city: '',
+          address: '',
+          telephone: '',
+          distanceFromCityCenter: '',
+          photos: [],
+          title: '',
+          desc: '',
+          rating: 0,
+          rooms: [],
+          cheapestPrice: 0,
+        });
+        setIsLoading(false)
+      } else {
+        // Handle the error scenario when the response is not successful.
+        console.log("Failed to submit hotel data.");
+        setIsLoading(false)
+      }
+    } catch (error) {
+      console.log("Error occurred while submitting hotel data:", error);
+      setIsLoading(false)
+    }
+  };
+
+
+
+
 
   const resultRef = useRef(null)
 
-  const [img, setImg] = useState([]);
-  const [hotelName, setHotelName] = useState('');
-  const [typeOfHotel, setTypeOfHotel] = useState('');
-  const [description, setDescription] = useState('');
-  const [hotelRating, setHotelRating] = useState('');
-  const [price, setPrice] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [distance, setDistance] = useState('');
-  const [telephone, setTelephone] = useState('');
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    // You can access all the form values using the state variables above
-    console.log({
-      img,
-      hotelName,
-      typeOfHotel,
-      description,
-      hotelRating,
-      price,
-      address,
-      city,
-      distance,
-      telephone,
-    });
-
-    // Send the form data to the backend server
-    fetch('http://localhost:8600/hotels', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${'token'}`,
-      },
-      body: JSON.stringify({
-        img,
-        hotelName,
-        typeOfHotel,
-        description,
-        hotelRating,
-        price,
-        address,
-        city,
-        distance,
-        telephone,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the response from the backend if needed
-        console.log('Response from backend:', data);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error('Error:', error);
-      });
-
-
-  };
-
   return (
-    
-    <div className="newContainer">
+    <LoadingOverlay active={isLoading} className="hdpContainer">
       <NavbarLS />
-      <Header type="hotel" resultRef={resultRef}/>
-      <div className="hotel-adding-page">
-        <h2>Add a New Hotel</h2>
-        <form onSubmit={handleFormSubmit}>
-          <div className="img-input">
-            <label htmlFor="img">Image:</label>
-            <img src={img} alt="Hotel" />
-            <input
-              type="img"
-              id="img"
-              value={img}
-              onChange={(e) => setImg(e.target.value)}
-            />
-            <button className="anhImgUploadBtn">Upload</button>
-          </div>
-          <div className="hotelName-input">
-            <label htmlFor="hotelName">Hotel Name:</label>
+      <Header type='hotel' resultRef={resultRef} />
+    <div className="HotelAddingPage">
+      
+      <form onSubmit={handleSubmit}>
+        <div className="hapItems">
+          <h2>Add Hotel</h2>
+          <div className="hapItem">
+            <label htmlFor="name">Name:</label>
             <input
               type="text"
-              id="hotelName"
-              value={hotelName}
-              onChange={(e) => setHotelName(e.target.value)}
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
             />
           </div>
-          <div className="typeOfHotel-input">
-            <label htmlFor="typeOfHotel">Type of Hotel:</label>
+          <div className="hapItem">
+            <label htmlFor="title">Name of the Owner:</label>
             <input
               type="text"
-              id="typeOfHotel"
-              value={typeOfHotel}
-              onChange={(e) => setTypeOfHotel(e.target.value)}
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+              required
             />
           </div>
-          <div className="description-input">
-            <label htmlFor="description">Description:</label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
-          </div>
-          <div className="hotelRating-input">
-            <label htmlFor="hotelRating">Hotel Rating:</label>
-            <input
-              type="number"
-              id="hotelRating"
-              value={hotelRating}
-              onChange={(e) => setHotelRating(e.target.value)}
-            />
-          </div>
-          <div className="price-input">
-            <label htmlFor="price">Price:</label>
-            <input
-              type="number"
-              id="price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-          </div>
-          <div className="address-input">
-            <label htmlFor="address">Address:</label>
+          <div className="hapItem">
+            <label htmlFor="typeOfProperty">Type of Property:</label>
             <input
               type="text"
-              id="address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              id="typeOfProperty"
+              name="typeOfProperty"
+              value={formData.typeOfProperty}
+              onChange={handleInputChange}
+              required
+              list="propertyTypes"
             />
+            <datalist id="propertyTypes">
+              <option value="Hotel" />
+              <option value="Apartment" />
+              <option value="Resorts" />
+              <option value="Villas" />
+              <option value="Cabins" />
+              <option value="Other" />
+            </datalist>
           </div>
-          <div className="telephone-input">
-            <label htmlFor="telephone">Tel:</label>
-            <input
-              type="number"
-              id="telephone"
-              value={telephone}
-              onChange={(e) => setTelephone(e.target.value)}
-            />
-          </div>
-          <div className="city-input">
+          <div className="hapItem">
             <label htmlFor="city">City:</label>
             <input
               type="text"
               id="city"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              name="city"
+              value={formData.city}
+              onChange={handleInputChange}
+              required
             />
           </div>
-          <div className="distance-input">
-            <label htmlFor="distance">Distance:</label>
+          <div className="hapItem">
+            <label htmlFor="address">Address:</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value={formData.address}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="hapItem">
+            <label htmlFor="telephone">Telephone:</label>
+            <input
+              type="tel"
+              id="telephone"
+              name="telephone"
+              value={formData.telephone}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="hapItem">
+            <label htmlFor="distanceFromCityCenter">Distance from City Center:</label>
+            <input
+              type="text"
+              id="distanceFromCityCenter"
+              name="distanceFromCityCenter"
+              value={formData.distanceFromCityCenter}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="hapItem">
+            <UploadPhoto />
+
+            {/* <label htmlFor="photos">Photos:</label>
+            <input
+              type="file"
+              id="photos"
+              name="photos"
+              multiple
+              onChange={(event) => {
+                const files = event.target.files;
+                if (!files) {
+                 setFormData((prevData) => ({
+                  ...prevData,
+                  photos: null,
+                }));
+                }
+                const photoUrls = [];
+                for (let i = 0; i < files.length; i++) {
+                  const url = URL.createObjectURL(files[i]);
+                  photoUrls.push(url);
+                }
+                setFormData((prevData) => ({
+                  ...prevData,
+                  photos: photoUrls,
+                }));
+              }}
+            /> */}
+
+
+          </div>
+          {/* <div className="hapItem">
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+              required
+            />
+          </div> */}
+          <div className="hapItem">
+            <label htmlFor="desc">Description:</label>
+            <textarea
+              id="desc"
+              name="desc"
+              value={formData.desc}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="hapItem">
+            <label htmlFor="rating">Rating:</label>
             <input
               type="number"
-              id="distance"
-              value={distance}
-              onChange={(e) => setDistance(e.target.value)}
+              id="rating"
+              name="rating"
+              value={Number(formData.rating)}
+              min={0}
+              max={5}
+              onChange={handleInputChange}
             />
           </div>
-          <button type="submit">Add Hotel</button>
-        </form>
-      </div>
-      <Contact ref={resultRef} />
+          <div className="hapItem">
+            <label>Rooms:</label>
+            {formData.rooms.map((room, index) => (
+              <div key={`room-${index}`} className="roomItem">
+                <span>Room {index + 1}</span>
+                <div className="roomItemInner">
+                  <div className="hapItem">
+                    <label htmlFor={`roomTitle-${index}`}>Room Type:</label>
+                    <input
+                      className='riiInput'
+                      type="text"
+                      id={`roomTitle-${index}`}
+                      name="roomTitle"
+                      value={room.roomTitle}
+                      onChange={(event) => handleRoomInputChange(index, event)}
+                      required
+                    />
+                  </div>
+                  <div className="hapItem">
+                    <label htmlFor={`price-${index}`}>Price:</label>
+                    <input
+                      className='riiInput'
+                      type="number"
+                      id={`price-${index}`}
+                      name="price"
+                      value={room.price}
+                      onChange={(event) => handleRoomInputChange(index, event)}
+                      required
+                    />
+                  </div>
+                  <div className="hapItem">
+                    <label htmlFor={`maxPeople-${index}`}>Max People:</label>
+                    <input
+                      className='riiInput'
+                      type="number"
+                      id={`maxPeople-${index}`}
+                      name="maxPeople"
+                      value={room.maxPeople}
+                      onChange={(event) => handleRoomInputChange(index, event)}
+                      required
+                    />
+                  </div>
+                  <div className="hapItem">
+                    <label htmlFor={`roomDesc-${index}`}>Room Description:</label>
+                    <textarea
+                      className='riiInput'
+                      id={`roomDesc-${index}`}
+                      name="roomDesc"
+                      value={room.roomDesc}
+                      onChange={(event) => handleRoomInputChange(index, event)}
+                      required
+                    />
+                  </div>
+                  <button type="button" onClick={() => handleRemoveRoom(index)}>Remove Room</button>
+                </div>
+              </div>
+            ))}
+            <button type="button" onClick={handleAddRoom}>Add Room</button>
+          </div>
+          <div className="hapItem">
+            <label htmlFor="cheapestPrice">Cheapest Price:</label>
+            <input
+              type="number"
+              id="cheapestPrice"
+              name="cheapestPrice"
+              value={formData.cheapestPrice}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      
     </div>
+    <Contact ref={resultRef}/>
+    </LoadingOverlay>
   );
-}
+};
+
+export default HotelAddingPage;
