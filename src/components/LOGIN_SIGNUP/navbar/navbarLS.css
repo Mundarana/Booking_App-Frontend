@@ -1,8 +1,7 @@
-.navbar{
+.navbar {
   background-color: aquamarine;
   display: flex;
   justify-content: center;
-  
 }
 
 .navWrapper {
@@ -13,7 +12,7 @@
   max-width: 1124px;
 }
 
-.navContainer{
+.navContainer {
   color: #0071c0;
   display: flex;
   align-items: center;
@@ -21,14 +20,13 @@
 
 .logo {
   font-weight: 800;
-  
 }
 
-.logoName{
+.logoName {
   color: blue;
 }
 
-.logoType{
+.logoType {
   color: #0071c0;
 }
 
@@ -37,16 +35,17 @@
   justify-content: end;
 }
 
-.navButton{
+.navButton {
   margin-top: 20px;
   margin-left: 15px;
   border: none;
-  border-radius: .13rem;
+  border-radius: 0.13rem;
   padding: 5px 10px;
   cursor: pointer;
   color: white;
   background-color: #0071c0;
   transition: 1s ease;
+  width: 80px;
 }
 
 .navButton:hover {
