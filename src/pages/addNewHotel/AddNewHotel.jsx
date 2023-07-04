@@ -114,10 +114,6 @@ const HotelAddingPage = () => {
           cheapestPrice: 0,
         });
         setIsLoading(false);
-      } else {
-        // Handle the error scenario when the response is not successful.
-        console.log("Failed to submit hotel data.");
-        setIsLoading(false);
       }
     } catch (error) {
       console.log("Error occurred while submitting hotel data:", error);
