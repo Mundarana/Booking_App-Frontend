@@ -8,6 +8,7 @@ import { useRef } from "react";
 import LoadingOverlay from "react-loading-overlay";
 import AuthContext from "../../context/authContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const localUrl = "http://localhost:8600/hotels";
 const deployedUrl = "https://booking-app-eqel.onrender.com/hotels";
@@ -27,6 +28,8 @@ const HotelAddingPage = () => {
     rooms: [],
     cheapestPrice: 0,
   });
+
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -114,6 +117,7 @@ const HotelAddingPage = () => {
           cheapestPrice: 0,
         });
         setIsLoading(false);
+        navigate("/hotels");
       }
     } catch (error) {
       console.log("Error occurred while submitting hotel data:", error);
