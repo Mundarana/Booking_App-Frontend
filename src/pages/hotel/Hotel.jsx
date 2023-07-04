@@ -1,15 +1,15 @@
-import './hotel.css';
-import { useState, useEffect, useRef } from 'react';
-import Navbar from '../../components/LOGIN_SIGNUP/navbar/NavbarLS';
-import Header from '../../components/header/Header';
-import Contact from '../../components/contact/Conatct';
-import { ImLocation2 } from 'react-icons/im';
-import { BsFillTelephoneFill } from 'react-icons/bs';
+import "./hotel.css";
+import { useState, useEffect, useRef } from "react";
+import Navbar from "../../components/LOGIN_SIGNUP/navbar/NavbarLS";
+import Header from "../../components/header/Header";
+import Contact from "../../components/contact/Conatct";
+import { ImLocation2 } from "react-icons/im";
+import { BsFillTelephoneFill } from "react-icons/bs";
 import LoadingOverlay from "react-loading-overlay";
 import { AuthContext } from "../../context/authContext";
-import ImageGallery from 'react-image-gallery';
+import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 const localUrl = "http://localhost:8600/hotels";
 const deployedUrl = "https://booking-app-eqel.onrender.com/hotels";
@@ -24,52 +24,68 @@ export default function Hotel() {
 
   const resultRef = useRef(null);
 
-  const {id} = useParams()
+  const { id } = useParams();
 
-  console.log("$$$$$$$$$&&&&&&&&§§§§§§§$$$$$$$$$$$$$$$", id)
+  console.log("$$$$$$$$$&&&&&&&&§§§§§§§$$$$$$$$$$$$$$$", id);
 
   const fetchHotelData = async () => {
     try {
       const response = await fetch(`${deployedUrl}/${id}`);
       if (!response.ok) {
-        throw new Error('Failed to fetch hotel data');
+        throw new Error("Failed to fetch hotel data");
       }
       const data = await response.json();
       setHotelData(data.data);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching hotel data:', error);
-      setError('Failed to fetch hotel data');
+      console.error("Error fetching hotel data:", error);
+      setError("Failed to fetch hotel data");
       setLoading(false);
     }
   };
 
-  console.log("HOTEL DATA",hotelData)
+  console.log("HOTEL DATA", hotelData);
 
   useEffect(() => {
-    fetchHotelData()
+    fetchHotelData();
   }, []);
-
-
 
   const photos = [
     {
-      src: 'https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg'
+      original:
+        "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
+      thumbnail:
+        "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
     },
     {
-      src: 'https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg'
+      original:
+        "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
+      thumbnail:
+        "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
     },
     {
-      src: 'https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-villas_300/dd0d7f8202676306a661aa4f0cf1ffab31286211.jpg'
+      original:
+        "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-villas_300/dd0d7f8202676306a661aa4f0cf1ffab31286211.jpg",
+      thumbnail:
+        "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-villas_300/dd0d7f8202676306a661aa4f0cf1ffab31286211.jpg",
     },
     {
-      src: 'https://cf.bstatic.com/static/img/theme-index/carousel_320x240/bg_resorts/6f87c6143fbd51a0bb5d15ca3b9cf84211ab0884.jpg'
+      original:
+        "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/bg_resorts/6f87c6143fbd51a0bb5d15ca3b9cf84211ab0884.jpg",
+      thumbnail:
+        "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/bg_resorts/6f87c6143fbd51a0bb5d15ca3b9cf84211ab0884.jpg",
     },
     {
-      src: 'https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-apartments_300/9f60235dc09a3ac3f0a93adbc901c61ecd1ce72e.jpg'
+      original:
+        "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-apartments_300/9f60235dc09a3ac3f0a93adbc901c61ecd1ce72e.jpg",
+      thumbnail:
+        "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-apartments_300/9f60235dc09a3ac3f0a93adbc901c61ecd1ce72e.jpg",
     },
     {
-      src: 'https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o='
+      original:
+        "https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o=",
+      thumbnail:
+        "https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o=",
     },
   ];
 
@@ -82,11 +98,10 @@ export default function Hotel() {
     setOpen(true);
   };
 
-
   const handleBookNow = () => {
     if (showTelephone) {
       // Call the telephone number
-      window.open(`tel:${hotelData.telephone}`, '_blank');
+      window.open(`tel:${hotelData.telephone}`, "_blank");
     } else {
       // Show the telephone number
       setShowTelephone(true);
@@ -98,67 +113,60 @@ export default function Hotel() {
   };
 
   if (loading) {
-    return (
-      <div className='hotelLoading'>Loading...</div>
-    );
+    return <div className="hotelLoading">Loading...</div>;
   }
 
   if (error) {
-    return (
-      <div>Error: {error}</div>
-    );
+    return <div>Error: {error}</div>;
   }
 
   // Add a check for hotelData and photos
   if (!hotelData) {
-    return (
-      <div>No hotel data available</div>
-    );
+    return <div>No hotel data available</div>;
   }
 
   if (!hotelData) {
-    return (
-      <div>No hotel data available</div>
-    );
+    return <div>No hotel data available</div>;
   }
+
+  console.log("PHOTOS", photos);
 
   return (
     <LoadingOverlay>
       <Navbar />
-      <Header type='hotel' resultRef={resultRef} />
+      <Header type="hotel" resultRef={resultRef} />
 
       <div className="hotelContainer">
         <div className="hotelWrapper">
           <h1 className="hotelTitle">{hotelData.name}</h1>
           <div className="hotelAddress">
             <ImLocation2 />
-            <span className="">{hotelData.address},{hotelData.city}</span>
+            <span className="">
+              {hotelData.address},{hotelData.city}-
+              {hotelData.distanceFromCityCenter}km from the City-Center
+            </span>
           </div>
           <div className="hotelTelno">
             <BsFillTelephoneFill />
-            <span >{hotelData.telephone}</span>
+            <span>{hotelData.telephone}</span>
           </div>
-          <span className='hotelDistance'>Excellent location - {hotelData.distanceFromCityCenter}km from City-Center </span>
+          <span className="hotelDistance">
+            Excellent location - {hotelData.distanceFromCityCenter}km from
+            City-Center{" "}
+          </span>
           <div className="hotelDetails">
             <div className="hotelDetailsText">
               <h4 className="hotelTitle">Owner:{hotelData.title}</h4>
-              <p className="hotelDesc">
-                {hotelData.desc}
-              </p>
+              <p className="hotelDesc">{hotelData.desc}</p>
             </div>
             <div className="hotelDetailsPrice">
               <h1>Perfect for summer-vication</h1>
-              <span>
-                {hotelData.location}
-              </span>
+              <span>{hotelData.location}</span>
               <h2>
                 <b>{hotelData.price}</b>(7 nights)
               </h2>
-              <button
-                className="siCheckButton"
-                onClick={handleBookNow}
-              >
-                {showTelephone ? 'Call Now' : 'Book Now'}
+              <button className="siCheckButton" onClick={handleBookNow}>
+                {showTelephone ? "Call Now" : "Book Now"}
               </button>
             </div>
           </div>
@@ -180,15 +188,11 @@ export default function Hotel() {
       <Contact ref={resultRef} />
     </LoadingOverlay>
 
-
-
-
     // <div>
     //   <Navbar />
     //   <Header type='hotel' resultRef={resultRef}/>
-     
-    //   <div className="hotelContainer">
 
+    //   <div className="hotelContainer">
 
     //     <div className="hotelWrapper">
 
@@ -235,7 +239,5 @@ export default function Hotel() {
     //   </div>
     //   <Contact ref={resultRef} />
     // </div>
-
-
   );
 }
