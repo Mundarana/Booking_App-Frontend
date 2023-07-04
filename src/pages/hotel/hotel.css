@@ -132,3 +132,7 @@
 .hotelDetailsPrice button:hover {
   background-color: blue;
 }
+
+.image-gallery-slide .image-gallery-image {
+  width: 40%;
+}

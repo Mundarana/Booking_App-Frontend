@@ -165,6 +165,7 @@ export default function Hotel() {
               <h2>
                 <b>{hotelData.price}</b>(7 nights)
               </h2>
+              <span>{hotelData.rooms.roomDesc}</span>
               <button className="siCheckButton" onClick={handleBookNow}>
                 {showTelephone ? "Call Now" : "Book Now"}
               </button>
@@ -182,6 +183,7 @@ export default function Hotel() {
           onSlide={setSlideNumber}
           showPlayButton={false}
           showFullscreenButton={true}
+          
         />
       </div>
 

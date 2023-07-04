@@ -49,6 +49,20 @@ export default function SearchItem() {
     }
   };
 
+  function getRatingText(rating) {
+    if (rating >= 4) {
+      return 'Excellent';
+    } else if (rating >= 3) {
+      return 'Good';
+    } else if (rating >= 2) {
+      return 'Average';
+    } else if (rating >= 1) {
+      return 'Poor';
+    } else {
+      return 'No Rating';
+    }
+  }
+
   return (
     <div className="siContainer">
       {hotels.data?.map((hotel) => {
@@ -77,8 +91,11 @@ export default function SearchItem() {
 
           <div className="siDetail">
             <div className="siRating">
-              <span>Good</span>
+              <span>{getRatingText(hotel.rating)}</span>
               <button>{hotel.rating}</button>
+            </div>
+            <div className="isDetailRoomText">
+              <span>{hotel.rooms.roomDesc}</span>
             </div>
             <div className="siDetailText">
               <span className="siPrice">{hotel.rooms[0]?.price}€</span>
