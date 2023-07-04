@@ -86,7 +86,7 @@ const HotelAddingPage = () => {
     setIsLoading(true);
     console.log("FORM DATA RIGHT BEFORE SUBMISSION", formData);
     try {
-      const response = await fetch(localUrl, {
+      const response = await fetch(deployedUrl, {
         method: "POST", // Adjust the method as per your backend API
         headers: {
           "Content-Type": "application/json",
@@ -220,7 +220,7 @@ const HotelAddingPage = () => {
               />
             </div>
             <div className="hapItem">
-              <UploadPhoto />
+              {/* <UploadPhoto /> */}
 
               {/* <label htmlFor="photos">Photos:</label>
             <input
