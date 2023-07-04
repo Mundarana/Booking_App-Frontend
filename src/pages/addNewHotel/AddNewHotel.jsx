@@ -86,7 +86,7 @@ const HotelAddingPage = () => {
     setIsLoading(true);
     console.log("FORM DATA RIGHT BEFORE SUBMISSION", formData);
     try {
-      const response = await fetch(deployedUrl, {
+      const response = await fetch(localUrl, {
         method: "POST", // Adjust the method as per your backend API
         headers: {
           "Content-Type": "application/json",
