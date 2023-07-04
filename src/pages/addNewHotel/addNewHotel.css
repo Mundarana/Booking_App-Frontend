@@ -1,63 +1,81 @@
-/* hotel-adding-page.css */
+/* HotelAddingPage */
+.HotelAddingPage {
 
-.hotel-adding-page {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.hotel-adding-page h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.hotel-adding-page form {
-  display: grid;
-  gap: 10px;
-}
-
-.hotel-adding-page label {
-  font-weight: bold;
-}
-
-.hotel-adding-page input,
-.hotel-adding-page textarea {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-}
-
-.anhImgUploadBtn{
-  margin-top: 10px;
+.HotelAddingPage form {
   display: flex;
-  background-color: #0071c0;
-  color: white;
+  flex-direction: column;
+}
+
+.HotelAddingPage h2 {
+  margin-bottom: 10px;
   font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  width: 80px;
-  justify-content: center;
-  cursor: pointer;
-  transition: 1s ease;
 }
 
-.anhImgUploadBtn:hover {
-  background-color: blue;
+/* hapItems */
+.hapItems {
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
-.hotel-adding-page button[type="submit"] {
-  background-color: #0071c0;
-  color: white;
-  border: none;
+.hapItem {
+  margin-bottom: 10px;
+}
+
+.hapItem label {
+  display: inline-block;
+  width: 120px;
+}
+
+.hapItem input,
+.hapItem textarea {
+  margin: 10px 0 10px 0;
+  padding: 5px;
+  width: 80%;
+}
+
+.hapItem button {
+  margin-top: 10px;
+}
+
+
+/* RoomItem */
+.roomItem {
+  margin-top: 20px;
+}
+
+.roomItemInner {
+  margin-top: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.roomItemInner .hapItem {
+  margin-bottom: 10px;
+}
+
+
+
+.roomItemInner button {
+  margin-top: 10px;
+}
+
+/* Submit Button */
+.HotelAddingPage button[type="submit"] {
   padding: 10px 20px;
-  font-size: 18px;
-  font-weight: bold;
+  background-color: #0071c0;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: 1s ease;
+  transition:  1s ease;
 }
 
-.hotel-adding-page button[type="submit"]:hover {
+.HotelAddingPage button[type="submit"]:hover {
   background-color: blue;
 }
