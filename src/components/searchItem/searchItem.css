@@ -108,3 +108,18 @@
   background-color: blue;
 }
 
+
+.siDeletBtn button{
+  background-color: #0071c0;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  transition: 1s ease;
+  cursor: pointer;
+}
+
+.siDeletBtn button:hover{
+  background-color: blue;
+  
+}
