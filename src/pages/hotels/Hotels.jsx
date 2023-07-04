@@ -12,33 +12,7 @@ import Contact from '../../components/contact/Conatct';
 import { useRef } from 'react';
 import LoadingOverlay from "react-loading-overlay";
 
-const cityList = [
-  { name: "Amsterdam", country: "NL" },
-  { name: "Athens", country: "GR" },
-  { name: "Barcelona", country: "ES" },
-  { name: "Berlin", country: "DE" },
-  { name: "Brussels", country: "BE" },
-  { name: "Budapest", country: "HU" },
-  { name: "Copenhagen", country: "DK" },
-  { name: "Dublin", country: "IE" },
-  { name: "Edinburgh", country: "GB" },
-  { name: "Florence", country: "IT" },
-  { name: "Geneva", country: "CH" },
-  { name: "Istanbul", country: "TR" },
-  { name: "Lisbon", country: "PT" },
-  { name: "London", country: "GB" },
-  { name: "Madrid", country: "ES" },
-  { name: "Milan", country: "IT" },
-  { name: "Munich", country: "DE" },
-  { name: "Oslo", country: "NO" },
-  { name: "Paris", country: "FR" },
-  { name: "Prague", country: "CZ" },
-  { name: "Rome", country: "IT" },
-  { name: "Stockholm", country: "SE" },
-  { name: "Vienna", country: "AT" },
-  { name: "Warsaw", country: "PL" },
-  { name: "Zurich", country: "CH" },
-];
+
 
 export default function Hotels() {
   const resultRef = useRef(null);

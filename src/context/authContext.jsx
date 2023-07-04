@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 
 export default function AuthContextProvider(props) {
   const [token, setToken] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -11,6 +12,7 @@ export default function AuthContextProvider(props) {
     if (storedToken) {
       setToken(storedToken);
     }
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -28,6 +30,8 @@ export default function AuthContextProvider(props) {
   const logout = () => {
     setToken(null);
   };
+
+  if (isLoading) return null;
 
   return (
     <AuthContext.Provider value={{ token, login, logout }}>
