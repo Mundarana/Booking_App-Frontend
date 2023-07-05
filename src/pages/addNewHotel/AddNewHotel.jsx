@@ -6,14 +6,17 @@ import Header from "../../components/header/Header";
 import UploadPhoto from "../../components/uploadPhotos/UploadPhoto";
 import { useRef } from "react";
 import LoadingOverlay from "react-loading-overlay";
-import AuthContext from "../../context/authContext";
-import axios from "axios";
+import { AuthContext } from "../../context/authContext";
+import { useJwt } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 
 const localUrl = "http://localhost:8600/hotels";
 const deployedUrl = "https://booking-app-eqel.onrender.com/hotels";
 
 const HotelAddingPage = () => {
+  const { token } = useContext(AuthContext);
+  const { decodedToken } = useJwt(token);
+
   const [formData, setFormData] = useState({
     name: "",
     typeOfProperty: "",
@@ -27,6 +30,7 @@ const HotelAddingPage = () => {
     rating: 0,
     rooms: [],
     cheapestPrice: 0,
+    user_id: null,
   });
 
   const navigate = useNavigate();
@@ -93,6 +97,7 @@ const HotelAddingPage = () => {
         method: "POST", // Adjust the method as per your backend API
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       });
@@ -115,6 +120,7 @@ const HotelAddingPage = () => {
           rating: 0,
           rooms: [],
           cheapestPrice: 0,
+          user_id: decodedToken?._id,
         });
         setIsLoading(false);
         navigate("/hotels");
@@ -127,6 +133,7 @@ const HotelAddingPage = () => {
 
   const resultRef = useRef(null);
 
+  console.log("###########tolken###############", decodedToken?._id);
   return (
     <LoadingOverlay active={isLoading} className="hdpContainer">
       <NavbarLS />
