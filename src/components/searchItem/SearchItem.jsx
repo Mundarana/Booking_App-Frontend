@@ -91,7 +91,6 @@ export default function SearchItem() {
   return (
     <div className="siContainer">
       {hotels.data?.map((hotel) => {
-        console.log("HEREEEEEEEEEEEEEEEEEEE", hotel);
         return (
           <div key={hotel.id} className="si">
             <img
@@ -136,7 +135,6 @@ export default function SearchItem() {
                 </button>
               </div>
               <div className="isDetailRoomText">
-                {console.log("HHHHHHHHHHHHH", hotel.rooms)}
                 {hotel.rooms.map((room) => (
                   <span>{room.desc}</span>
                 ))}

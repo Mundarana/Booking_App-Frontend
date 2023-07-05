@@ -18,7 +18,7 @@ export default function NavbarLS() {
     <div className=" navbar">
       <div className="navWrapper">
       <div className="navContainer">
-        <Link to="/"><span> <img src="" alt="" /> </span><span className="logoName logo">Smile<span className="logoType logo">Booking</span></span></Link>
+        <Link to="/"><span>  </span><span className="logoName logo">Smile<span className="logoType logo">Booking</span></span></Link>
       </div>
       <nav>
         {token !== null && (
